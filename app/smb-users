@@ -1,0 +1,5 @@
+# username password [uid group gid]
+# examples:
+# john password123
+# john password123 1000 john 1000
+# john password123 1000 wheel
