@@ -12,6 +12,8 @@ samba_add_user() {
   local group=${4:-""}
   local gid=${5:-""}
 
+  echo Adding samba user ${username}
+
   # add unix group if doesn't exist
   if [ ! -z "${group}" ] && ! grep -q "^${group}:" /etc/group; then
     addgroup ${gid:+--gid ${gid}} ${group}
@@ -36,6 +38,7 @@ samba_add_user_file() {
     echo "Error: unable to parse user file ${user_file}"
     exit 1
   fi
+  echo Parsing samba user file ${user_file}
 
   # parse user lines and add each user to samba
   while read -r line || [ -n "${line}" ]
@@ -50,7 +53,6 @@ samba_add_user_file() {
         echo "expected format: username password [uid group gid]"
         exit 1
       fi
-      # username
       samba_add_user ${linearray[0]} ${linearray[1]} ${linearray[2]} ${linearray[3]} ${linearray[4]}
     fi
   done < "${user_file}"

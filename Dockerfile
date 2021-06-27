@@ -29,10 +29,9 @@ RUN apt-get update -q \
 # create default configuration
 RUN mkdir -p /opt/samba
 RUN mkdir -p /opt/samba/shares
-RUN mkdir -p /opt/samba/shares/public && chmod 0666 /opt/samba/shares/public
+RUN mkdir -p /opt/samba/shares/public \
+	&& chmod 0666 /opt/samba/shares/public
 COPY app/smb.conf /etc/samba/smb.conf
-COPY app/smb-global.conf /opt/samba/
-COPY app/smb-shares.conf /opt/samba/
 COPY app/smb-users /opt/samba/
 
 # entrypoint
