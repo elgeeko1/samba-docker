@@ -1,4 +1,4 @@
-FROM ubuntu:groovy
+FROM ubuntu:20.04
 LABEL maintainer="https://github.com/elgeeko1"
 
 USER root
@@ -11,7 +11,7 @@ EXPOSE 445/tcp
 # install samba: samba samba-common samba-client samba-vfs-modules
 # install elasticsearch: fscrawner elasticsearch
 RUN apt-get update -q \
-  && apt-get install -y -q \
+  && apt-get install --no-install-recommends -y -q \
        samba \
        samba-common \
        samba-client \
