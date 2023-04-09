@@ -70,4 +70,4 @@ samba-tool testparm --suppress-prompt
 nmbd -i &
 
 # start samba
-smbd --foreground --log-stdout --no-process-group
+smbd --foreground --debug-stdout --no-process-group
