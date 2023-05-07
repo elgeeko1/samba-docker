@@ -37,11 +37,6 @@ RUN rm -rf /var/lib/apt/lists/*
 FROM scratch
 COPY --from=BASE / /
 LABEL maintainer="elgeeko1"
-LABEL source="https://github.com/elgeeko1/roon-server-docker"
-
-FROM scratch
-COPY --from=BASE / /
-LABEL maintainer="elgeeko1"
 LABEL source="https://github.com/elgeeko1/samba-docker"
 
 EXPOSE 137/udp
@@ -64,3 +59,6 @@ WORKDIR /opt/samba/shares
 COPY app/samba-entrypoint.sh /opt/samba
 RUN chmod +x /opt/samba/samba-entrypoint.sh
 ENTRYPOINT ["/opt/samba/samba-entrypoint.sh"]
+
+HEALTHCHECK --interval=30s --timeout=10s \
+  CMD smbclient -L \\localhost -U % -m SMB3
